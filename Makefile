@@ -1,5 +1,5 @@
 PROGRAM_NAME = MarchingTets
-CMAKE_EXECUTOR = run.sh
+CMAKE_EXECUTOR = CMakeCompile.sh
 BUILD_DIR = ./build
 BIN_DIR = ./bin
 
