@@ -11,7 +11,10 @@ project(MarchingTets) # sets PROJECT_NAME as well
 find_package(VTK REQUIRED COMPONENTS 
   CommonColor
   CommonCore
-  FiltersSources
+  CommonDataModel
+  FiltersCore
+  FiltersGeneral
+  IOXML
   InteractionStyle
   RenderingContextOpenGL2
   RenderingCore
@@ -31,7 +34,7 @@ endif()
 #  ============= Set src files =======================
 set(CMAKE_NINJA_FORCE_RESPONSE_FILE "ON" CACHE BOOL "Force Ninja to use response files.")
 add_executable(${PROJECT_NAME} 
-    src/CylinderExample.cxx 
+    src/ColoredElevationMap.cpp 
 )
 
 # ================ Link Libraries ======================= 
