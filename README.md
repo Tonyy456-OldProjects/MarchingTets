@@ -24,3 +24,6 @@ make
 make run
 ```
 
+## 👉 CMakeCompile.sh
+If you want to add functionality to what the make file executes you can edit this script. 'make' calls it.
+
