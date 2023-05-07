@@ -8,7 +8,7 @@ set(CMAKE_PREFIX_PATH "/Users/ajdalesandro/local/VTK-9.2.6")
 project(MarchingTets) # sets PROJECT_NAME as well
 
 # ================= Find VTK Packages.=======================
-find_package(VTK COMPONENTS 
+find_package(VTK REQUIRED COMPONENTS 
   CommonColor
   CommonCore
   FiltersSources
