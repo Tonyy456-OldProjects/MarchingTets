@@ -5,29 +5,22 @@
 </br>
 A repo that intends to build on previous Marching Tetrahedrons research
 
-# ⚡Install Software
-1. download cmake
-```sh
-brew install cmake
-cmake --version
-```
+## ⚡Install Software
+to build and run the application, you will need the following
+* CMake (version 3.11 or later)
+* VTK (version 9.2.6 or later)
+* Qt5 (version 5.15.8 or later
 
-2. Download VTK. I recommend going onto their website and downloading and compiling their .tar  
-zsh/macos
-```sh
-brew install vtk
-```
-
-3. Download Qt5
-```sh
-brew install qt@5
-ls /usr/local/Cellar/qt@5
-# Note installation directory
-```
-
-4. Update CMakeLists.txt
+## 🌟Running the Project
+1. Update CMakeLists.txt
 ```cmake
 set(Qt5_DIR "<qt5_build_dir>/lib/cmake/Qt5")
 set(CMAKE_PREFIX_PATH "<vtk_build_dir>")
+```
+
+2. Use the makefile for shortcuts
+```sh
+make
+make run
 ```
 
