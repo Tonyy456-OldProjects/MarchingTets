@@ -1,4 +1,6 @@
 # MarchingTets
+![GitHub pull requests](https://img.shields.io/github/issues-pr/Tonyy456/MarchingTets?color=5579c6&style=plastic)
+![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/Tonyy456/MarchingTets?color=C07B3A&style=plastic)
 ![GitHub contributors](https://img.shields.io/github/contributors/Tonyy456/MarchingTets?color=09903F&style=plastic)
 ![GitHub top language](https://img.shields.io/github/languages/top/Tonyy456/MarchingTets?style=plastic)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/Tonyy456/MarchingTets?label=Commits)
