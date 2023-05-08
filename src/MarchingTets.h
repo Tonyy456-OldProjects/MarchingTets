@@ -1,20 +1,22 @@
+#ifndef MARCHING_TETS_H
+#define MARCHING_TETS_H
 
-#include "windows.h"
-#include "vtkConeSource.h"
+#include "mtMesh.h"
+#include "ApplicationWindow.h"
 #include "vtkPolyDataMapper.h"
-#include "vtkRenderWindow.h"
-#include "vtkRenderWindowInteractor.h"
-#include "vtkRenderer.h"
+#include "vtkActor.h"
 
-class MarchingTets {
+class MarchingTets
+{
     public:
-        MarchingTets(HWND parent);
+        MarchingTets(); //HWND is handle window
         ~MarchingTets();
+        void Start();
     private:
-        vtkRenderWindow *renWin;
-        vtkRenderer *renderer;
-        vtkRenderWindowInteractor *iren;
-        vtkConeSource *cone;
-        vtkPolyDataMapper *coneMapper;
-        vtkActor *coneActor;
+        ApplicationWindow *window;
+        mtMesh *mesh;
+        vtkPolyDataMapper *meshMapper;
+        vtkActor *meshActor;
 };
+
+#endif

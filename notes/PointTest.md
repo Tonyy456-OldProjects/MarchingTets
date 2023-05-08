@@ -1,0 +1,7 @@
+To determine if a 3D point is inside or outside a solid using the marching tetrahedrons algorithm, you first need to define the solid in question. This is typically done by creating a volumetric data set, where each point in space is assigned a value that corresponds to its position relative to the solid.
+
+In the marching tetrahedrons algorithm, tetrahedrons are constructed by connecting four adjacent data points in the volumetric data set. The values of these data points are used to determine the configuration of the tetrahedron, which in turn is used to determine if the tetrahedron intersects the surface of the solid. If the tetrahedron intersects the surface, then one or more of its edges cross the surface, and the point in question is considered to be inside the solid. If the tetrahedron does not intersect the surface, then the point is considered to be outside the solid.
+
+To determine if a point is inside or outside the solid, you would first need to create a volumetric data set that represents the solid. This can be done using a variety of methods, such as voxelization of a 3D model or using medical imaging data. Once you have the volumetric data set, you can then apply the marching tetrahedrons algorithm to determine if the point is inside or outside the solid.
+
+The output of the marching tetrahedrons algorithm is typically a surface mesh that represents the surface of the solid. You can use this surface mesh to visualize the solid and to determine if a point is inside or outside the solid by checking if the point is contained within the mesh.
