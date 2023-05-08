@@ -35,7 +35,10 @@ endif()
 #  ============= Set src files =======================
 set(CMAKE_NINJA_FORCE_RESPONSE_FILE "ON" CACHE BOOL "Force Ninja to use response files.")
 add_executable(${PROJECT_NAME} 
-    src/ColoredElevationMap.cpp 
+    src/MarchingTets.cpp
+    src/mtMesh.cpp
+    src/WindowProcedure.cpp
+    src/ApplicationWindow.cpp
 )
 #target_compile_definitions(${PROJECT_NAME} PRIVATE USE_SCREEN_SIZE)
 
