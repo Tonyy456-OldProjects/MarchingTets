@@ -2,7 +2,7 @@
 #ifndef MARCHING_TETS_H
 #define MARCHING_TETS_H
 
-#include "windows.h"
+#include "window.h"
 #include "vtkConeSource.h"
 #include "vtkPolyDataMapper.h"
 #include "vtkRenderWindow.h"
@@ -12,10 +12,10 @@
 class MarchingTets
 {
     public:
-        MarchingTets(HWND parent); //HWND is handle window
+        MarchingTets(HWND handleWindow); //HWND is handle window
         ~MarchingTets();
     private:
-        vtkRenderingWindow *renWin;
+        vtkRenderWindow *renWin;
         vtkRenderer *renderer;
         vtkRenderWindowInteractor *iren;
         vtkConeSource *cone;

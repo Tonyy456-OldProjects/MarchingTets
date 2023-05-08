@@ -9,7 +9,7 @@ MarchingTets::MarchingTets()
     this->renWin = vtkRenderWindow::New();
     this->renWin->AddRenderer(this->renderer);
     // setup the parent window
-    this->renWin->SetParentId(hwnd);
+    //this->renWin->SetParentId(hwnd);
     this->iren = vtkRenderWindowInteractor::New();
     this->iren->SetRenderWindow(this->renWin);
     this->cone = vtkConeSource::New();
