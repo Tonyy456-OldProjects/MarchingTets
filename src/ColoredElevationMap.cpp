@@ -125,14 +125,26 @@ int main(int, char*[])
   renderWindow->AddRenderer(renderer);
   vtkNew<vtkRenderWindowInteractor> renderWindowInteractor;
   renderWindowInteractor->SetRenderWindow(renderWindow);
-  renderWindow->SetWindowName("ColoredElevationMap");
+  renderWindow->SetWindowName("Marching Tetrahedrons");
 
   // Add the actor to the scene
   renderer->AddActor(actor);
   renderer->SetBackground(namedColors->GetColor3d("DarkSlateGray").GetData());
 
+
   // Render and interact
+#ifdef USE_SCREEN_SIZE
+  // This allows you to resize the window and shows the window name.
   renderWindow->Render();
+  renderWindow->SetSize(renderWindow->GetScreenSize());
+#else
+  // Set to true to get full screen mode.
+  // This uses the whole screen for the image.
+  renderWindow->SetFullScreen(true);
+#endif
+  renderWindow->MakeCurrent();
+
+  renderWindowInteractor->Initialize();
   renderWindowInteractor->Start();
 
   return EXIT_SUCCESS;

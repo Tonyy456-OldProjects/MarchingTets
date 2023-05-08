@@ -7,6 +7,7 @@ set(CMAKE_PREFIX_PATH "/Users/ajdalesandro/local/VTK-9.2.6")
 # ================= Set Project Name =======================
 project(MarchingTets) # sets PROJECT_NAME as well
 
+
 # ================= Find VTK Packages.=======================
 find_package(VTK REQUIRED COMPONENTS 
   CommonColor
@@ -36,6 +37,7 @@ set(CMAKE_NINJA_FORCE_RESPONSE_FILE "ON" CACHE BOOL "Force Ninja to use response
 add_executable(${PROJECT_NAME} 
     src/ColoredElevationMap.cpp 
 )
+#target_compile_definitions(${PROJECT_NAME} PRIVATE USE_SCREEN_SIZE)
 
 # ================ Link Libraries ======================= 
 target_link_libraries(${PROJECT_NAME} 
