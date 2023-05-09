@@ -5,7 +5,10 @@ set(Qt5_DIR "/usr/local/Cellar/qt@5/5.15.8_3/lib/cmake/Qt5")
 set(CMAKE_PREFIX_PATH "/Users/ajdalesandro/local/VTK-9.2.6")
 
 # ================= Set Project Name =======================
-project(MarchingTets) # sets PROJECT_NAME as well
+if (NOT DEFINED PROJECT_NAME)
+    message(FATAL_ERROR "PPROJECT_NAME not set")
+endif()
+project(${PROJECT_NAME}) # sets PROJECT_NAME as well
 
 
 # ================= Find VTK Packages.=======================
@@ -54,7 +57,8 @@ vtk_module_autoinit(
 )
 
 # =========== INSTALL COMMAND for makefile ===========
-set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/bin)
-install(TARGETS ${PROJECT_NAME} 
-    RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}
-)
+if(DEFINED MT_BIN_DIR)
+    install(TARGETS ${PROJECT_NAME} 
+        RUNTIME DESTINATION ${MT_BIN_DIR}
+    )
+endif()

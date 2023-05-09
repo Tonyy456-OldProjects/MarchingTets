@@ -1,0 +1,63 @@
+#!/bin/bash
+
+SCRIPT_PATH=$(pwd)
+
+# build a single project specified by first parameter
+build_by_num() {
+    path_pattern=$SCRIPT_PATH/$MT_PROJECT_PATH
+    path=$(echo "$path_pattern" | sed "s/#/$1/")
+
+    for file in $path; do
+        build $path 
+    done
+}
+
+# build all projects and allow them to be ran
+build_all()
+{
+    for file in ./projects/*; do
+        echo "$file"
+    done
+}
+
+# script to build a single project
+build()
+{
+    PROJECT_NAME=$(echo "$(basename $1)" | sed 's/^[^_]*_//')
+    echo "Building $PROJECT_NAME"
+    output_file=$SCRIPT_PATH/$MT_BUILD_OUTPUT_DIR/output_"$PROJECT_NAME".txt
+
+    # clean out old build
+    cd $1
+    if [ -d ./build ]; then
+        rm -rf build
+    fi
+    mkdir build && cd build
+
+    # cleanout old build output file
+    if [ -f ./$output_file ]; then
+        rm -f output_file
+    fi
+
+    # build!
+    cmake \
+        -DPROJECT_NAME=$PROJECT_NAME \
+        -DMT_BIN_DIR=$SCRIPT_PATH/$BIN_DIR \
+        .. >> $output_file
+    make
+
+    #install into ./bin
+    make install 2>/dev/null
+}
+
+MT_CONFIG_FILE=.config.env
+if [ -f $MT_CONFIG_FILE ]; then
+    source $MT_CONFIG_FILE
+fi
+# check what input was
+if [[ "$1" == "all" ]]; then
+    build_all
+else
+    build_by_num $1
+fi
+
