@@ -1,11 +1,14 @@
 cmake_minimum_required(VERSION 3.11)
- 
-# ================= Set library directores. Expecially for qt and VTK =======================
-set(Qt5_DIR "/usr/local/Cellar/qt@5/5.15.8_3/lib/cmake/Qt5")
-set(CMAKE_PREFIX_PATH "/Users/ajdalesandro/local/VTK-9.2.6")
 
 # ================= Set Project Name =======================
+if (NOT DEFINED PROJECT_NAME)
+    message(FATAL_ERROR "PPROJECT_NAME not set")
+endif()
 project(${PROJECT_NAME}) # sets PROJECT_NAME as well
+
+# ================= Set library directores. Expecially for qt and VTK =======================
+set(Qt5_DIR ${MY_Qt5})
+set(CMAKE_PREFIX_PATH ${MY_VTK})
 
 
 # ================= Find VTK Packages.=======================

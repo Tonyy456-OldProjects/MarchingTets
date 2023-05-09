@@ -1,6 +1,11 @@
 #!/bin/bash
 
+# set up simple things
 SCRIPT_PATH=$(pwd)
+MT_CONFIG_FILE=.config.env
+if [ -f $MT_CONFIG_FILE ]; then
+    source $MT_CONFIG_FILE
+fi
 
 # build a single project specified by first parameter
 build_by_num() {
@@ -8,15 +13,17 @@ build_by_num() {
     path=$(echo "$path_pattern" | sed "s/#/$1/")
 
     for file in $path; do
-        build $path 
+        build $file 
     done
 }
 
 # build all projects and allow them to be ran
 build_all()
 {
-    for file in ./projects/*; do
-        echo "$file"
+    path_pattern=$SCRIPT_PATH/$MT_PROJECT_PATH
+    path=$(echo "$path_pattern" | sed "s/#/\*/")
+    for file in $path; do
+        build $file
     done
 }
 
@@ -24,7 +31,7 @@ build_all()
 build()
 {
     PROJECT_NAME=$(echo "$(basename $1)" | sed 's/^[^_]*_//')
-    echo "Building $PROJECT_NAME"
+    echo "============== $PROJECT_NAME =============== "
     output_file=$SCRIPT_PATH/$MT_BUILD_OUTPUT_DIR/output_"$PROJECT_NAME".txt
 
     # clean out old build
@@ -39,10 +46,12 @@ build()
         rm -f output_file
     fi
 
-    # build!
+    # build, set name, bin location, and library locations!
     cmake \
-        -DPROJECT_NAME=$PROJECT_NAME \
-        -DMT_BIN_DIR=$SCRIPT_PATH/$BIN_DIR \
+        -D"PROJECT_NAME"=$PROJECT_NAME \
+        -D"MT_BIN_DIR"=$SCRIPT_PATH/$MT_BIN_DIR \
+        -D"MY_Qt5"=$MT_Qt5_DIR \
+        -D"MY_VTK"=$MT_VTK_DIR \
         .. >> $output_file
     make
 
@@ -50,10 +59,6 @@ build()
     make install 2>/dev/null
 }
 
-MT_CONFIG_FILE=.config.env
-if [ -f $MT_CONFIG_FILE ]; then
-    source $MT_CONFIG_FILE
-fi
 # check what input was
 if [[ "$1" == "all" ]]; then
     build_all
