@@ -9,6 +9,11 @@ project(${PROJECT_NAME}) # sets PROJECT_NAME as well
 # ================= Set library directores. Expecially for qt and VTK =======================
 set(Qt5_DIR ${MY_Qt5})
 set(CMAKE_PREFIX_PATH ${MY_VTK})
+find_package(Qt5 COMPONENTS Widgets REQUIRED)
+include_directories(${Qt5Widgets_INCLUDE_DIRS})
+add_definitions(${Qt5Widgets_DEFINITIONS})
+qt5_wrap_cpp(MOC_FILES mywidget.h)
+qt5_wrap_ui(UI_FILES mywidget.ui)
 
 
 # ================= Find VTK Packages.=======================
@@ -31,24 +36,57 @@ find_package(VTK REQUIRED COMPONENTS
 if (NOT VTK_FOUND)
     message(FATAL_ERROR "${PROJECT_NAME}: Unable to find the VTK build folder.")
 endif()
+if(NOT(TARGET VTK::GUISupportQt))
+    message(FATAL_ERROR "MinimalQtVTKApp: VTK not built with Qt support.")
+endif()
+if(NOT DEFINED VTK_QT_VERSION)
+  set(VTK_QT_VERSION 5)
+endif()
 if (NOT QT5_FOUND AND NOT DEFINED Qt5_DIR)
     message(FATAL_ERROR "${PROJECT_NAME}: Unable to find the QT5 build folder. Set it's path")
 endif()
 
+set(qt_components Core Gui Widgets)
+if(${VTK_QT_VERSION} VERSION_GREATER_EQUAL 6)
+  list(APPEND qt_components OpenGLWidgets)
+endif()
+list(SORT qt_components)
+# We have ui files, so this will also bring in the macro:
+#   qt5_wrap_ui or qt_wrap_ui from Widgets.
+find_package(Qt${VTK_QT_VERSION} QUIET
+  REQUIRED COMPONENTS ${qt_components}
+)
+foreach(_qt_comp IN LISTS qt_components)
+  list(APPEND qt_modules "Qt${VTK_QT_VERSION}::${_qt_comp}")
+endforeach()
+message (STATUS "VTK_VERSION: ${VTK_VERSION}, Qt Version: ${Qt${VTK_QT_VERSION}Widgets_VERSION}")
+
+# Instruct CMake to run moc and uic automatically when needed.
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+
+file(GLOB UI_FILES *.ui)
+file(GLOB QT_WRAP *.h)
+file(GLOB CXX_FILES *.cpp)
+
 #  ============= Set src files =======================
 set(CMAKE_NINJA_FORCE_RESPONSE_FILE "ON" CACHE BOOL "Force Ninja to use response files.")
-add_executable(${PROJECT_NAME} 
-    src/MarchingTets.cpp
-    src/mtMesh.cpp
-    src/WindowProcedure.cpp
-    src/ApplicationWindow.cpp
+add_executable(${PROJECT_NAME} MACOSX_BUNDLE
+  ${CXX_FILES} ${UISrcs} ${QT_WRAP}
 )
 #target_compile_definitions(${PROJECT_NAME} PRIVATE USE_SCREEN_SIZE)
+
+if (Qt${VTK_QT_VERSION}Widgets_VERSION VERSION_LESS "5.11.0")
+  qt5_use_modules(MinimalQtVTKApp ${qt_components})
+else()
+  target_link_libraries(MinimalQtVTKApp ${qt_modules})
+endif()
 
 # ================ Link Libraries ======================= 
 target_link_libraries(${PROJECT_NAME} 
     PRIVATE ${VTK_LIBRARIES}
 )
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Widgets)
 
 # ================ VTK auto initialization is needed  ======================= 
 vtk_module_autoinit(
