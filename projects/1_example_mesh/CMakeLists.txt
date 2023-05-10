@@ -1,11 +1,14 @@
 cmake_minimum_required(VERSION 3.11)
- 
-# ================= Set library directores. Expecially for qt and VTK =======================
-set(Qt5_DIR "/usr/local/Cellar/qt@5/5.15.8_3/lib/cmake/Qt5")
-set(CMAKE_PREFIX_PATH "/Users/ajdalesandro/local/VTK-9.2.6")
 
 # ================= Set Project Name =======================
-project(MarchingTets) # sets PROJECT_NAME as well
+if (NOT DEFINED PROJECT_NAME)
+    message(FATAL_ERROR "PPROJECT_NAME not set")
+endif()
+project(${PROJECT_NAME}) # sets PROJECT_NAME as well
+
+# ================= Set library directores. Expecially for qt and VTK =======================
+set(Qt5_DIR ${MY_Qt5})
+set(CMAKE_PREFIX_PATH ${MY_VTK})
 
 
 # ================= Find VTK Packages.=======================
@@ -35,10 +38,7 @@ endif()
 #  ============= Set src files =======================
 set(CMAKE_NINJA_FORCE_RESPONSE_FILE "ON" CACHE BOOL "Force Ninja to use response files.")
 add_executable(${PROJECT_NAME} 
-    src/MarchingTets.cpp
-    src/mtMesh.cpp
-    src/WindowProcedure.cpp
-    src/ApplicationWindow.cpp
+    src/ColoredElevationMap.cpp
 )
 #target_compile_definitions(${PROJECT_NAME} PRIVATE USE_SCREEN_SIZE)
 
@@ -54,7 +54,8 @@ vtk_module_autoinit(
 )
 
 # =========== INSTALL COMMAND for makefile ===========
-set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/bin)
-install(TARGETS ${PROJECT_NAME} 
-    RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}
-)
+if(DEFINED MT_BIN_DIR)
+    install(TARGETS ${PROJECT_NAME} 
+        RUNTIME DESTINATION ${MT_BIN_DIR}
+    )
+endif()

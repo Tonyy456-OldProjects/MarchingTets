@@ -2,9 +2,6 @@
 #include "ApplicationWindow.h"
 #include <vtkNamedColors.h>
 
-#include "debug/log.h"
-
-
 ApplicationWindow::ApplicationWindow()
 {
     this->renderer = vtkRenderer::New();
@@ -18,7 +15,6 @@ ApplicationWindow::ApplicationWindow()
     this->renWin->SetWindowName("Marching Tetrahedrons");
     vtkNew<vtkNamedColors> namedColors;
     this->renderer->SetBackground(namedColors->GetColor3d("DarkSlateGray").GetData());
-    LOG("Hello World!");
 }
 
 ApplicationWindow::~ApplicationWindow()
