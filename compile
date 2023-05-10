@@ -5,6 +5,9 @@ SCRIPT_PATH=$(pwd)
 MT_CONFIG_FILE=.config.env
 if [ -f $MT_CONFIG_FILE ]; then
     source $MT_CONFIG_FILE
+else
+    echo No $MT_CONFIG_FILE provided
+    exit
 fi
 
 # build a single project specified by first parameter
@@ -25,7 +28,13 @@ build_all()
     path_pattern=$SCRIPT_PATH/$MT_PROJECT_PATH
     path=$(echo "$path_pattern" | sed "s/#/\*/")
     for file in $path; do
-        build $file
+        name=$(basename $file)
+        number="${name%%_*}"
+        if echo "$COMPILE_ALL_IGNORE" | grep -q "\<$number\>"; then
+            echo SKIPPING PROJECT $number 
+        else
+            build $file
+        fi
     done
 }
 
@@ -49,6 +58,7 @@ build()
     fi
 
     # build, set name, bin location, and library locations!
+    mkdir -p $SCRIPT_PATH/$MT_BIN_DIR
     cmake \
         -D"PROJECT_NAME"=$PROJECT_NAME \
         -D"MT_BIN_DIR"=$SCRIPT_PATH/$MT_BIN_DIR \
@@ -61,8 +71,11 @@ build()
     make install 2>/dev/null
 }
 
+mkdir -p $SCRIPT_PATH/$MT_BUILD_OUTPUT_DIR
 # check what input was
 if [[ "$1" == "all" ]]; then
+    build_all
+elif [ $# -eq 0 ]; then
     build_all
 else
     build_by_num $1

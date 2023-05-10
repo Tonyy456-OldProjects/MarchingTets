@@ -6,14 +6,14 @@
 
 int main(int argc, char** argv)
 {
-  // needed to ensure appropriate OpenGL context is created for VTK rendering.
-  QSurfaceFormat::setDefaultFormat(QVTKOpenGLNativeWidget::defaultFormat());
+    //boiler plate
+    QSurfaceFormat::setDefaultFormat(QVTKOpenGLNativeWidget::defaultFormat());
+    //start an app
+    QApplication app(argc, argv);
+    //calls class from other file and make it render
+    //this class extends QMainWindow and ui
+    SideBySideRenderWindowsQt sideBySideRenderWindowsQt;
+    sideBySideRenderWindowsQt.show();
 
-  // QT Stuff
-  QApplication app(argc, argv);
-
-  SideBySideRenderWindowsQt sideBySideRenderWindowsQt;
-  sideBySideRenderWindowsQt.show();
-
-  return app.exec();
+    return app.exec();
 }

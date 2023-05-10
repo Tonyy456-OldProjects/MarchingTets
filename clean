@@ -1,0 +1,73 @@
+#!/bin/bash
+
+# set up simple things
+SCRIPT_PATH=$(pwd)
+MT_CONFIG_FILE=.config.env
+
+if [ -f $MT_CONFIG_FILE ]; then
+    source $MT_CONFIG_FILE
+else
+    echo "No $MT_CONFIG_FILE File Provided"
+    exit     
+fi
+
+# clean all projects and allow them to be ran
+clean_all()
+{
+
+    #clean build directories
+    if [ -n $MT_PROJECT_PATH ]; then
+        path_pattern=$SCRIPT_PATH/$MT_PROJECT_PATH
+        path=$(echo "$path_pattern" | sed "s/#/\*/")
+        for file in $path; do
+            clean $file
+        done
+    fi
+
+    #clean build output
+    if [ -n $MT_BUILD_OUTPUT_DIR ]; then
+        build_dir=$SCRIPT_PATH/$MT_BUILD_OUTPUT_DIR
+        if [ -d $build_dir ]; then
+            echo "Cleaning $MT_BUILD_OUTPUT_DIR"
+            rm -rf $build_dir
+        fi
+    fi
+
+    #cleanout binaries
+    if [ -n $MT_BIN_DIR ]; then
+        bin_dir=$SCRIPT_PATH/$MT_BIN_DIR
+        if [ -d $bin_dir ]; then
+            echo "Cleaning ./bin"
+            rm -rf $bin_dir
+        fi
+    fi
+
+    toc=$SCRIPT_PATH/build
+    if [ -d $toc ]; then
+        echo "Cleaning ./build"
+        rm -rf $toc
+    fi
+}
+
+# script to clean a single project
+clean()
+{
+    PROJECT_NAME=$(echo "$(basename $1)" | sed 's/^[^_]*_//')
+    if [ -d $1/build ]; then
+        echo "Cleaning $PROJECT_NAME/build"
+        rm -rf $1/build
+    fi
+
+    if [ -d $1/bin ]; then
+        echo "Cleaning $PROJECT_NAME/bin"
+        rm -rf $1/bin
+    fi
+
+    if [ -f $1/build_output.txt ]; then
+        echo "Cleaning $PROJECT_NAME/build_output.txt"
+        rm -rf $1/build_output.txt
+    fi
+}
+
+clean_all
+

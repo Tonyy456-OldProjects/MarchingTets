@@ -27,7 +27,6 @@ SideBySideRenderWindowsQt::SideBySideRenderWindowsQt(QWidget* parent)
 
   vtkNew<vtkNamedColors> colors;
 
-  //MAKE WINDOWS OF TYPE vtkGenericOpenGLRenderWindow
   vtkNew<vtkGenericOpenGLRenderWindow> renderWindowLeft;
   vtkNew<vtkGenericOpenGLRenderWindow> renderWindowRight;
 #if VTK890
