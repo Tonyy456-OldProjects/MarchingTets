@@ -27,8 +27,9 @@ Marching Tetrahedrons is a technique used in computer graphics to render 3D mode
 
 ## Installation and Usage
 1. Install required software.
-2. Update CMakeLists.txt
-3. use the compile bash script with the respective numbered project.
-```sh ./compile 3 ```
+2. create .config.env and follow .config.md to configure project.
+3. Update CMakeLists.txt if neccesary.
+4. use the compile bash script with the respective numbered project.```sh ./compile 3 ```
+
 ## Contact Information
 [insert contact information]
