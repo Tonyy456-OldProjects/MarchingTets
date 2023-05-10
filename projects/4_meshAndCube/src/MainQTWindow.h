@@ -1,13 +1,23 @@
-#ifndef MT_MAIN_WINDOW_H
-#define MT_MAIN_WINDOW_H
+#ifndef TONY_MAIN_WINDOW_H
+#define TONY_MAIN_WINDOW_H
 
-class MainQTWindow
-{
-    public:
-        MainQTWindow();
-        ~MainQTWindow();
-    private:
-        int foo;
+#include "ui_TonyDesign.h"
+
+namespace Ui {
+    class MainQTWindow;
 }
+
+class MainQTWindow : public QMainWindow
+{
+    Q_OBJECT
+    public:
+        // Constructor/Destructor
+        explicit MainQTWindow(QWidget* parent = nullptr);
+        virtual ~MainQTWindow() = default;
+
+    private:
+        // Designer form
+        Ui::TonyMainWindow* ui;
+};
 
 #endif

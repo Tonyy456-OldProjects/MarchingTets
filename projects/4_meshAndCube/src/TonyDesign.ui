@@ -19,10 +19,10 @@
      <widget class="QWidget" name="widget" native="true">
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QOpenGLWidget" name="TonyLeftWindow"/>
+        <widget class="QVTKOpenGLNativeWidget" name="TonyLeftWindow"/>
        </item>
        <item>
-        <widget class="QOpenGLWidget" name="TonyRightWindow"/>
+        <widget class="QVTKOpenGLNativeWidget" name="TonyRightWindow"/>
        </item>
       </layout>
      </widget>
