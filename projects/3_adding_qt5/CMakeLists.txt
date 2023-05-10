@@ -9,27 +9,23 @@ project(${PROJECT_NAME}) # sets PROJECT_NAME as well
 # ================= Set library directores. Expecially for qt and VTK =======================
 set(Qt5_DIR ${MY_Qt5})
 set(CMAKE_PREFIX_PATH ${MY_VTK})
-find_package(Qt5 COMPONENTS Widgets REQUIRED)
-include_directories(${Qt5Widgets_INCLUDE_DIRS})
-add_definitions(${Qt5Widgets_DEFINITIONS})
-qt5_wrap_cpp(MOC_FILES mywidget.h)
-qt5_wrap_ui(UI_FILES mywidget.ui)
-
 
 # ================= Find VTK Packages.=======================
 find_package(VTK REQUIRED COMPONENTS 
   CommonColor
   CommonCore
-  CommonDataModel
   FiltersCore
-  FiltersGeneral
-  IOXML
+  FiltersSources
+  InfovisCore
   InteractionStyle
   RenderingContextOpenGL2
   RenderingCore
   RenderingFreeType
   RenderingGL2PSOpenGL2
   RenderingOpenGL2
+  ViewsQt
+  GUISupportQt
+  RenderingQt
 )
 
 # ================= Make Sure Packages are found =======================
@@ -65,28 +61,27 @@ message (STATUS "VTK_VERSION: ${VTK_VERSION}, Qt Version: ${Qt${VTK_QT_VERSION}W
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 
-file(GLOB UI_FILES *.ui)
-file(GLOB QT_WRAP *.h)
-file(GLOB CXX_FILES *.cpp)
+file(GLOB UI_FILES src/*.ui)
+file(GLOB QT_WRAP src/*.h)
+file(GLOB CXX_FILES src/*.cxx)
+
+message ("thing: ${CXX_FILES}")
 
 #  ============= Set src files =======================
 set(CMAKE_NINJA_FORCE_RESPONSE_FILE "ON" CACHE BOOL "Force Ninja to use response files.")
-add_executable(${PROJECT_NAME} MACOSX_BUNDLE
+add_executable(${PROJECT_NAME} 
   ${CXX_FILES} ${UISrcs} ${QT_WRAP}
 )
 #target_compile_definitions(${PROJECT_NAME} PRIVATE USE_SCREEN_SIZE)
 
 if (Qt${VTK_QT_VERSION}Widgets_VERSION VERSION_LESS "5.11.0")
-  qt5_use_modules(MinimalQtVTKApp ${qt_components})
+  qt5_use_modules(${PROJECT_NAME} ${qt_components})
 else()
-  target_link_libraries(MinimalQtVTKApp ${qt_modules})
+  target_link_libraries(${PROJECT_NAME} ${qt_modules})
 endif()
 
 # ================ Link Libraries ======================= 
-target_link_libraries(${PROJECT_NAME} 
-    PRIVATE ${VTK_LIBRARIES}
-)
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Widgets)
+target_link_libraries(${PROJECT_NAME} ${VTK_LIBRARIES})
 
 # ================ VTK auto initialization is needed  ======================= 
 vtk_module_autoinit(
