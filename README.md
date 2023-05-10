@@ -9,6 +9,10 @@ Marching Tetrahedrons is a technique used in computer graphics to render 3D mode
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/Tonyy456/MarchingTets?label=Commits)
 </br>
 
+## References
+* [Marching Tets Wikipedia](https://en.wikipedia.org/wiki/Marching_tetrahedra)
+* [Marching Tets Research Paper](https://arxiv.org/abs/2011.08697),    [pdf](https://arxiv.org/pdf/2011.08697.pdf)
+
 ## Preview
 [insert screenshots of project]
 
@@ -18,22 +22,12 @@ Marching Tetrahedrons is a technique used in computer graphics to render 3D mode
 * Qt5 version 5.15.8
 
 ## Features
-#### CMakeCompile.sh
- > This is a bash script that compiles all the software and calls the compiled makefile as well.
 [insert key things that this software does]
 
 ## Installation and Usage
 1. Install required software.
 2. Update CMakeLists.txt
-```cmake
-set(Qt5_DIR "<qt5_build_dir>/lib/cmake/Qt5")
-set(CMAKE_PREFIX_PATH "<vtk_build_dir>")
-```
-
-3. Use the makefile for shortcuts
-```sh
-make
-make run
-```
+3. use the compile bash script with the respective numbered project.
+```sh ./compile 3 ```
 ## Contact Information
 [insert contact information]
