@@ -2,6 +2,9 @@
 [Bb]uild/
 [Bb]in/
 
+# env file
+*.env
+
 # Prerequisites
 *.d
 
