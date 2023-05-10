@@ -10,9 +10,11 @@ fi
 # build a single project specified by first parameter
 build_by_num() {
     path_pattern=$SCRIPT_PATH/$MT_PROJECT_PATH
+    echo $path_pattern
     path=$(echo "$path_pattern" | sed "s/#/$1/")
 
     for file in $path; do
+        echo "Found $1: $file"
         build $file 
     done
 }
