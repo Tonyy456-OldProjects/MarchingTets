@@ -3,6 +3,9 @@
 
 #include "ui_TonyDesign.h"
 
+#include <QMainWindow>
+#include <QPushButton>
+
 namespace Ui {
     class MainQTWindow;
 }
@@ -14,10 +17,11 @@ class MainQTWindow : public QMainWindow
         // Constructor/Destructor
         explicit MainQTWindow(QWidget* parent = nullptr);
         virtual ~MainQTWindow() = default;
-
     private:
         // Designer form
         Ui::TonyMainWindow* ui;
+        QPushButton *helloWorldButton;
+
 };
 
 #endif

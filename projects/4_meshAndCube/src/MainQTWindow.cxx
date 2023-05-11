@@ -3,12 +3,12 @@
 #include "ui_TonyDesign.h"
 #include "LWindow.h"
 #include "RWindow.h"
+#include "Button/HWButton.h"
 
 #include <iostream>
 
 #include <vtkNamedColors.h>
 #include <vtkNew.h>
-//#include <QVTKOpenGLNativeWidget.h>
 
 #include <vtkGenericOpenGLRenderWindow.h>
 
@@ -29,6 +29,8 @@ MainQTWindow::MainQTWindow(QWidget* parent)
     this->ui->setupUi(this);
 
     vtkNew<vtkNamedColors> colors;
+
+    helloWorldButton = new HWButton(this);
 
     vtkNew<LWindow> leftWindow;
     vtkNew<RWindow> rightWindow;
@@ -79,5 +81,11 @@ MainQTWindow::MainQTWindow(QWidget* parent)
 
   this->ui->TonyLeftWindow->renderWindow()->AddRenderer(leftRenderer);
   this->ui->TonyRightWindow->renderWindow()->AddRenderer(rightRenderer);
+}
+
+void MainQTWindow::handleHelloWorldButton()
+{
+    // Add your desired functionality here
+    qDebug() << "Hello World Button clicked!";
 }
 
