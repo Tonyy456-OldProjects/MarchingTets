@@ -7,7 +7,7 @@ UIManager::UIManager() : ui(new Ui::TonyMainWindow)
     // creates main window and sets ui up
     mainWindow = new MainQTWindow();
     ui->setupUi(mainWindow);
-    mainWindow->Initialize(ui);
+    mainWindow->Setup(ui);
 
     // set up button to have HWButton behavior
     btn = new HWButton(ui->TonyHelloWorld, mainWindow);

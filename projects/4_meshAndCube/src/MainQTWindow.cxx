@@ -25,7 +25,7 @@ MainQTWindow::MainQTWindow( QWidget* parent)
 
 }
 
-void MainQTWindow::Initialize(Ui::TonyMainWindow *ui){
+void MainQTWindow::Setup(Ui::TonyMainWindow *ui){
     vtkNew<vtkNamedColors> colors;
 
     vtkNew<LWindow> leftWindow;
