@@ -2,6 +2,7 @@
 #define TONY_MAIN_WINDOW_H
 
 #include "ui_TonyDesign.h"
+#include "Buttons/HWButton.h"
 
 #include <QMainWindow>
 #include <QPushButton>
@@ -20,7 +21,7 @@ class MainQTWindow : public QMainWindow
     private:
         // Designer form
         Ui::TonyMainWindow* ui;
-        QPushButton *helloWorldButton;
+        HWButton *btn;
 
 };
 

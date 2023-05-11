@@ -2,8 +2,7 @@
 #include <QDebug>
 #include <QAbstractButton>
 
-HWButton::HWButton(QPushButton* button, QWidget *parent) :
-    QPushButton(parent), m_button(button)    
+HWButton::HWButton(QPushButton* button) : QWidget(nullptr), m_button(button)    
 {
     connect(m_button, &QPushButton::clicked, this, &HWButton::handleButtonClicked);
 }

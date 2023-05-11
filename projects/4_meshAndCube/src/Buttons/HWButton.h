@@ -9,11 +9,11 @@
 #include "../ui_TonyDesign.h"
 
 
-class HWButton : public QPushButton
+class HWButton : public QWidget 
 {
 Q_OBJECT
     public:
-        explicit HWButton(QPushButton* button, QWidget *parent = nullptr);
+        explicit HWButton(QPushButton* button);
         virtual ~HWButton() = default;
 
     private slots:
