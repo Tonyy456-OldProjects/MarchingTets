@@ -18,11 +18,7 @@ class MainQTWindow : public QMainWindow
         // Constructor/Destructor
         explicit MainQTWindow(QWidget* parent = nullptr);
         virtual ~MainQTWindow() = default;
-    private:
-        // Designer form
-        Ui::TonyMainWindow* ui;
-        HWButton *btn;
-
+        void Initialize(Ui::TonyMainWindow *ui);
 };
 
 #endif

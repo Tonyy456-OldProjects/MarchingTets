@@ -1,17 +1,12 @@
 
 #include "MainQTWindow.h"
-#include "ui_TonyDesign.h"
 #include "LWindow.h"
 #include "RWindow.h"
-#include "Buttons/HWButton.h"
 
 #include <iostream>
-
 #include <vtkNamedColors.h>
 #include <vtkNew.h>
-
 #include <vtkGenericOpenGLRenderWindow.h>
-
 #include <vtkCamera.h>
 #include <vtkCubeSource.h>
 #include <vtkDataObjectToTable.h>
@@ -23,20 +18,21 @@
 #include <vtkSphereSource.h>
 #include <vtkVersion.h>
 
-MainQTWindow::MainQTWindow(QWidget* parent)
-    :QMainWindow(parent), ui(new Ui::TonyMainWindow) 
+
+MainQTWindow::MainQTWindow( QWidget* parent)
+    :QMainWindow(parent) 
 {
-    this->ui->setupUi(this);
 
+}
+
+void MainQTWindow::Initialize(Ui::TonyMainWindow *ui){
     vtkNew<vtkNamedColors> colors;
-
-    btn = new HWButton(this, ui->TonyHelloWorld);
 
     vtkNew<LWindow> leftWindow;
     vtkNew<RWindow> rightWindow;
 
-    this->ui->TonyLeftWindow->setRenderWindow(leftWindow);
-    this->ui->TonyRightWindow->setRenderWindow(rightWindow);
+    ui->TonyLeftWindow->setRenderWindow(leftWindow);
+    ui->TonyRightWindow->setRenderWindow(rightWindow);
 
 // Sphere
   vtkNew<vtkSphereSource> sphereSource;
@@ -79,6 +75,7 @@ MainQTWindow::MainQTWindow(QWidget* parent)
   rightRenderer->GetActiveCamera()->Zoom(0.8);
   rightRenderer->SetBackground(colors->GetColor3d("LightSteelBlue").GetData());
 
-  this->ui->TonyLeftWindow->renderWindow()->AddRenderer(leftRenderer);
-  this->ui->TonyRightWindow->renderWindow()->AddRenderer(rightRenderer);
+  ui->TonyLeftWindow->renderWindow()->AddRenderer(leftRenderer);
+  ui->TonyRightWindow->renderWindow()->AddRenderer(rightRenderer);
+
 }

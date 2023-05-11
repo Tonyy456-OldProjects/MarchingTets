@@ -1,19 +1,15 @@
 #include "HWButton.h"
 #include <QDebug>
-
-HWButton::HWButton(QMainWindow* window, QPushButton* button) : m_button(button)    
+HWButton::HWButton(QPushButton* button, QWidget* parent) : m_button(button)
 {
-    //QObject::connect(m_button, &QPushButton::clicked, this, &HWButton::handleButtonClicked);
-    
-    QObject::connect(m_button, &QPushButton::clicked, window, [this]() {
-        handleButtonClicked();
+    QObject::connect(m_button, &QPushButton::clicked, parent, [this]() {
+        onClick();
     });
 }
 
-void HWButton::handleButtonClicked()
+void HWButton::onClick()
 {
-    // Add your desired functionality here
-    qDebug() << "Hello World Button clicked!";
+    qDebug() << "Hello World!";
     m_button->setText("Clicked!");
 }
 
