@@ -1,10 +1,13 @@
 #include "HWButton.h"
 #include <QDebug>
-#include <QAbstractButton>
 
-HWButton::HWButton(QPushButton* button) : QWidget(nullptr), m_button(button)    
+HWButton::HWButton(QMainWindow* window, QPushButton* button) : m_button(button)    
 {
-    connect(m_button, &QPushButton::clicked, this, &HWButton::handleButtonClicked);
+    //QObject::connect(m_button, &QPushButton::clicked, this, &HWButton::handleButtonClicked);
+    
+    QObject::connect(m_button, &QPushButton::clicked, window, [this]() {
+        handleButtonClicked();
+    });
 }
 
 void HWButton::handleButtonClicked()

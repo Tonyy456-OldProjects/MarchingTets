@@ -1,22 +1,15 @@
 #ifndef HW_BUTTON_H
 #define HW_BUTTON_H
 
-#include <QDebug>
 #include <QPushButton>
-#include <QWidget>
-#include <QMainWindow>
-
 #include "../ui_TonyDesign.h"
+#include <QObject>
 
-
-class HWButton : public QWidget 
+class HWButton
 {
-Q_OBJECT
     public:
-        explicit HWButton(QPushButton* button);
+        explicit HWButton(QMainWindow* window, QPushButton* button);
         virtual ~HWButton() = default;
-
-    private slots:
         void handleButtonClicked();
 
     private:

@@ -30,7 +30,7 @@ MainQTWindow::MainQTWindow(QWidget* parent)
 
     vtkNew<vtkNamedColors> colors;
 
-    btn = new HWButton(ui->TonyHelloWorld);
+    btn = new HWButton(this, ui->TonyHelloWorld);
 
     vtkNew<LWindow> leftWindow;
     vtkNew<RWindow> rightWindow;
