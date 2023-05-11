@@ -1,15 +1,17 @@
 #include "HWButton.h"
 #include <QDebug>
+#include <QAbstractButton>
 
-HWButton::HWButton(QMainWindow mainWindow, QWidget *parent = nullptr)
-    :QPushButton(parent), ui(new Ui::TonyHelloWorld)
+HWButton::HWButton(QPushButton* button, QWidget *parent) :
+    QPushButton(parent), m_button(button)    
 {
-    connect(this, &QPushButton::clicked, mainWindow, &HWButton::handleHelloWorldButton() );
+    connect(m_button, &QPushButton::clicked, this, &HWButton::handleButtonClicked);
 }
 
-void HWButton::handleHelloWorldButton()
+void HWButton::handleButtonClicked()
 {
     // Add your desired functionality here
     qDebug() << "Hello World Button clicked!";
+    m_button->setText("Clicked!");
 }
 

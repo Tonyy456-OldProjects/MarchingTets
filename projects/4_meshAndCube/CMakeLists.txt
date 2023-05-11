@@ -61,9 +61,13 @@ message (STATUS "VTK_VERSION: ${VTK_VERSION}, Qt Version: ${Qt${VTK_QT_VERSION}W
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 
-file(GLOB UI_FILES src/**/*.ui)
-file(GLOB QT_WRAP src/**/*.h)
-file(GLOB CXX_FILES src/**/*.cxx)
+#file(GLOB_RECURSE UI_FILES src/**/*.ui)
+#file(GLOB_RECURSE QT_WRAP src/**/*.h)
+#file(GLOB_RECURSE CXX_FILES src/**/*.cxx)
+
+file(GLOB_RECURSE UI_FILES "src" "*.ui")
+file(GLOB_RECURSE QT_WRAP "src" "*.h")
+file(GLOB_RECURSE CXX_FILES "src" "*.cxx")
 
 message ("thing: ${CXX_FILES}")
 

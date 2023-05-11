@@ -1,8 +1,9 @@
-#ifndef HWBUTTON_H
-#define HWBUTTON_H
+#ifndef HW_BUTTON_H
+#define HW_BUTTON_H
 
 #include <QDebug>
 #include <QPushButton>
+#include <QWidget>
 #include <QMainWindow>
 
 #include "../ui_TonyDesign.h"
@@ -12,11 +13,15 @@ class HWButton : public QPushButton
 {
 Q_OBJECT
     public:
-        explicit HWButton(QMainWindow mainWindow, QWidget *parent = nullptr)
+        explicit HWButton(QPushButton* button, QWidget *parent = nullptr);
         virtual ~HWButton() = default;
+
     private slots:
-        void handleHelloWorldButton();
-}
+        void handleButtonClicked();
+
+    private:
+        QPushButton* m_button;
+};
 
 
 #endif
