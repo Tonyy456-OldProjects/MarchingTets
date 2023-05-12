@@ -1,6 +1,8 @@
 
 #include "UIManager.h"
 #include "ui_TonyDesign.h"
+#include "Buttons/HWButton.h"
+#include "Buttons/CloseScreenButton.h"
 
 UIManager::UIManager() : ui(new Ui::TonyMainWindow)
 {
@@ -10,7 +12,9 @@ UIManager::UIManager() : ui(new Ui::TonyMainWindow)
     mainWindow->Setup(ui);
 
     // set up button to have HWButton behavior
-    btn = new HWButton(ui->TonyHelloWorld, mainWindow);
+    //btn = new HWButton(ui->TonyHelloWorld, mainWindow);
+    btn1 = new CloseScreenButton(ui->TonyLeftWindow, ui->CloseWindowOne, mainWindow);
+    btn2 = new CloseScreenButton(ui->TonyRightWindow, ui->CloseWindowTwo, mainWindow);
 
 }
 

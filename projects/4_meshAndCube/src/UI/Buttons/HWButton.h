@@ -1,19 +1,14 @@
 #ifndef HW_BUTTON_H
 #define HW_BUTTON_H
 
-#include <QPushButton>
-#include <QMainWindow>
-#include "../ui_TonyDesign.h"
+#include "ButtonBehavior.h"
 
-class HWButton
+class HWButton : ButtonBehavior
 {
     public:
-        explicit HWButton(QPushButton* button, QWidget* parent = nullptr);
-        virtual ~HWButton() = default;
+        HWButton(QPushButton* button, QWidget* parent = nullptr);
         void onClick();
 
-    private:
-        QPushButton* m_button;
 };
 
 

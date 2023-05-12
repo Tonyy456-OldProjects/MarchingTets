@@ -1,7 +1,7 @@
 
 #include "ui_TonyDesign.h"
 #include "MainQTWindow.h"
-#include "Buttons/HWButton.h"
+#include "Buttons/ButtonBehavior.h"
 
 namespace Ui {
     class UIManager;
@@ -15,7 +15,8 @@ class UIManager
         void Show();
         MainQTWindow *GetWindow();
     private:
-        HWButton *btn;
+        ButtonBehavior *btn1;
+        ButtonBehavior *btn2;
         MainQTWindow *mainWindow;
         Ui::TonyMainWindow *ui;
 };

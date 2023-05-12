@@ -1,10 +1,9 @@
 #include "HWButton.h"
 #include <QDebug>
-HWButton::HWButton(QPushButton* button, QWidget* parent) : m_button(button)
+HWButton::HWButton(QPushButton* button, QWidget* parent)
+    : ButtonBehavior(button, parent)
 {
-    QObject::connect(m_button, &QPushButton::clicked, parent, [this]() {
-        onClick();
-    });
+    //no extra behavior yet
 }
 
 void HWButton::onClick()
