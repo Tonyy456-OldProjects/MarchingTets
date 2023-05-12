@@ -13,6 +13,7 @@ class UIManager
         UIManager();
         virtual ~UIManager() = default;
         void Show();
+        MainQTWindow *GetWindow();
     private:
         HWButton *btn;
         MainQTWindow *mainWindow;

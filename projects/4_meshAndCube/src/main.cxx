@@ -1,8 +1,10 @@
 #include <QApplication>
 #include <QSurfaceFormat>
 
-#include "MainQTWindow.h"
-#include "UIManager.h"
+#include "UI/MainQTWindow.h"
+#include "UI/UIManager.h"
+#include "CubeScene.h"
+#include "MeshScene.h"
 
 int main(int argc, char* argv[])
 {
@@ -10,6 +12,11 @@ int main(int argc, char* argv[])
     QApplication app(argc, argv);
 
     UIManager manager;
+
+    manager.GetWindow()->SetRenderOne(new CubeScene());
+    manager.GetWindow()->SetRenderTwo(new MeshScene());
+
     manager.Show(); 
+
     return app.exec();
 }

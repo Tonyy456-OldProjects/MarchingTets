@@ -2,11 +2,10 @@
 #define TONY_MAIN_WINDOW_H
 
 #include "ui_TonyDesign.h"
-#include "Buttons/HWButton.h"
 #include "UIElement.h"
-
+#include "MTWindowScene.h"
+#include "QTWindow.h"
 #include <QMainWindow>
-#include <QPushButton>
 
 namespace Ui {
     class MainQTWindow;
@@ -20,6 +19,11 @@ class MainQTWindow : public QMainWindow, public UIElement
         explicit MainQTWindow(QWidget* parent = nullptr);
         virtual ~MainQTWindow() = default;
         void Setup(Ui::TonyMainWindow *ui);
+        void SetRenderOne(MTWindowScene *scene);
+        void SetRenderTwo(MTWindowScene *scene);
+    private:
+        QTWindow *windowOne;
+        QTWindow *windowTwo;
 };
 
 #endif

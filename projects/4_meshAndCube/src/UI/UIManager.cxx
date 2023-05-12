@@ -14,6 +14,11 @@ UIManager::UIManager() : ui(new Ui::TonyMainWindow)
 
 }
 
+MainQTWindow * UIManager::GetWindow() 
+{
+    return this->mainWindow;
+}
+
 void UIManager::Show()
 {
     mainWindow->show();
