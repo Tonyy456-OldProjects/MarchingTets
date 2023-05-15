@@ -10,6 +10,14 @@ project(${PROJECT_NAME}) # sets PROJECT_NAME as well
 set(Qt5_DIR ${MY_Qt5})
 set(CMAKE_PREFIX_PATH ${MY_VTK})
 
+
+# Find Boost
+find_package(Boost REQUIRED)
+
+# Include Boost headers
+include_directories(${Boost_INCLUDE_DIRS})
+
+
 # ================= Find VTK Packages.=======================
 find_package(VTK REQUIRED COMPONENTS 
   CommonColor
@@ -75,6 +83,8 @@ add_executable(${PROJECT_NAME}
   ${CXX_FILES} ${UISrcs} ${QT_WRAP}
 )
 #target_compile_definitions(${PROJECT_NAME} PRIVATE USE_SCREEN_SIZE)
+set(SAVE_FILE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/ENV.txt")
+add_definitions(-DSAVE_FILE_PATH="${SAVE_FILE_PATH}")
 
 if (Qt${VTK_QT_VERSION}Widgets_VERSION VERSION_LESS "5.11.0")
   qt5_use_modules(${PROJECT_NAME} ${qt_components})
@@ -84,6 +94,8 @@ endif()
 
 # ================ Link Libraries ======================= 
 target_link_libraries(${PROJECT_NAME} ${VTK_LIBRARIES})
+# Link against Boost libraries
+target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})
 
 # ================ VTK auto initialization is needed  ======================= 
 vtk_module_autoinit(
