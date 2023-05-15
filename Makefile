@@ -1,5 +1,6 @@
+
 all:
-	./compile
+	./compile 5
 
 run:
-	./bin/meshAndCube
+	./bin/marching_cubes
