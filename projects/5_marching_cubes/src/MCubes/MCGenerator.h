@@ -6,10 +6,14 @@
 class MCGenerator
 {
     public:
-        MCGenerator();
+        MCGenerator(int xn, int yn, int zn, double seperation);
         ~MCGenerator();
         Mesh * GetMesh();
     private:
+        int x_slices;
+        int y_slices;
+        int z_slices;
+        double seperation;
         Mesh *mesh;
 
 };

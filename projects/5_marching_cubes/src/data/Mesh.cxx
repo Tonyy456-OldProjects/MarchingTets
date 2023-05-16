@@ -34,6 +34,14 @@ int Mesh::AddVertex(const double vs[3])
     return 1;
 }
 
+int Mesh::AddVertex(double v1, double v2, double v3)
+{
+    vertices.push_back(v1);
+    vertices.push_back(v2);
+    vertices.push_back(v3);
+    return 1;
+}
+
 int Mesh::AddTriangle(int v1, int v2, int v3)
 {
     triangles.push_back(v1);

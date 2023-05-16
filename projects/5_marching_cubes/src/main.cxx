@@ -8,6 +8,9 @@
 
 #include "Settings.h"
 #include "Application.h"
+#include "Debug.h"
+
+Debug debug;
 
 inline bool exists (const std::string& name) {
   struct stat buffer;   

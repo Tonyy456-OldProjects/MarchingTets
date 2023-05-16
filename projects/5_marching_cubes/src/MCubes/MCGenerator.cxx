@@ -1,10 +1,19 @@
 #include "MCGenerator.h"
 #include <iostream>
 #include <vtkMath.h>
-
-MCGenerator::MCGenerator()
+#include "LookUpTable.h"
+#include "../Debug.h"
+MCGenerator::MCGenerator(int xn, int yn, int zn, double seperation)
 {
+    x_slices = xn;
+    y_slices = yn;
+    z_slices = zn;
+    this->seperation = seperation;
     mesh = new Mesh();
+    mesh->AddVertex(0,0,0);
+    mesh->AddVertex(0,1,0);
+    mesh->AddVertex(2,0,0);
+    mesh->AddTriangle(0,1,2);
 }
 
 MCGenerator::~MCGenerator()
@@ -12,39 +21,27 @@ MCGenerator::~MCGenerator()
 
 }
 
+struct Point {
+    double x;
+    double y;
+    double z;
+
+    // Constructor
+    Point(double xVal = 0.0f, double yVal = 0.0f, double zVal = 0.0f)
+        : x(xVal), y(yVal), z(zVal) {
+    }
+    // Constructor that takes integers
+    Point(int xVal, int yVal, int zVal)
+        : x(static_cast<double>(xVal)), y(static_cast<double>(yVal)), z(static_cast<double>(zVal)) {
+    }
+};
+
+
 Mesh * MCGenerator::GetMesh()
 {
-    int width = 100;
-    int height = 100;
-    double maxHeight = 3.0;
-    double minHeight = -3.0;
-
-    // add the vertices in a grid
-    for(int z = 0; z < height; z++)
-    {
-        for(int x = 0; x < width; x++)
-        {
-            double xx = static_cast<double>(x);
-            double zz = static_cast<double>(z);
-            double yy = vtkMath::Random(minHeight, maxHeight);
-            double v[] = {xx,yy,zz};
-            mesh->AddVertex(v);
-        }
-    }
-
-    // add the triangles, iterate over each cube
-    for(int z = 0; z < height - 1; z++)
-    {
-        for(int x = 0; x < width - 1; x++)
-        {
-            int v1 = width * z + x; //top left
-            int v2 = width * (z + 1) + x; //bottom left
-            int v3 = width * (z + 1) + x + 1; // bottom right
-            int v4 = width * z + x + 1; //top right
-            int cube[] = {v1,v2,v3,v4};
-            mesh->AddCube(cube);
-        }
-    }
-
+    Point cvs[x_slices][y_slices][z_slices];
+    std::cout<<"wtf"<<std::endl;
+    debug(cubeIndex[13]);
+    debug(triangleIndex[cubeIndex[0]]);
     return mesh;
 }
