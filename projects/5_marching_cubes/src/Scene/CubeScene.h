@@ -1,6 +1,4 @@
-
-
-#include "UI/MTWindowScene.h"
+#include "../UI/MTWindowScene.h"
 
 class CubeScene : public MTWindowScene
 {

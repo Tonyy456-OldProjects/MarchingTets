@@ -1,13 +1,13 @@
 #ifndef M_MY_ITEM_H
 #define M_MY_ITEM_H
 
-#include "data/Mesh.h"
+#include "../Data/Mesh.h"
 
-class MyItem
+class MCGenerator
 {
     public:
-        MyItem();
-        ~MyItem();
+        MCGenerator();
+        ~MCGenerator();
         Mesh * GetMesh();
     private:
         Mesh *mesh;

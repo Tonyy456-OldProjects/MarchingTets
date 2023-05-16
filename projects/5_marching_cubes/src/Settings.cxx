@@ -1,7 +1,5 @@
 
 #include "Settings.h"
-#include <boost/algorithm/string.hpp>
-#include <fstream>
 
 Settings::Settings() {}
 
@@ -132,29 +130,6 @@ void Settings::Initialize(const std::string& filename)
     }
 
     file.close();
-}
-
-template <typename T>
-bool Settings::TryGetSetting(const std::string& key, T& value) const {
-    auto it = savedSettings.find(key);
-    if (it != savedSettings.end()) {
-        try {
-            value = boost::any_cast<T>(it->second);
-            return true;
-        } catch (const boost::bad_any_cast& ex) {
-            std::cout << "Error: Unable to cast setting '" << key << "' to type "
-                      << typeid(T).name() << std::endl;
-            return false;
-        }
-    } else {
-        std::cout << "Error: Setting '" << key << "' not found" << std::endl;
-        return false;
-    }
-}
-
-template <typename T>
-void Settings::SetSetting(const std::string& key, const T& value) {
-    savedSettings[key] = value;
 }
 
 Settings& Settings::getInstance() {

@@ -1,18 +1,13 @@
 #include <QApplication>
 #include <QSurfaceFormat>
 #include <iostream>
-
-#include "UI/MainQTWindow.h"
-#include "UI/UIManager.h"
-#include "CubeScene.h"
-#include "MeshScene.h"
-#include "MyItem.h"
-#include "Settings.h"
-
 #include <sys/stat.h>
 #include <unistd.h>
 #include <QDebug>
 #include <filesystem>
+
+#include "Settings.h"
+#include "Application.h"
 
 inline bool exists (const std::string& name) {
   struct stat buffer;   
@@ -23,7 +18,8 @@ int main(int argc, char* argv[])
 {
     QSurfaceFormat::setDefaultFormat(QVTKOpenGLNativeWidget::defaultFormat());
     QApplication app(argc, argv);
-   
+  
+    // INITIALIZE SETTINGS
     Settings &instance = Settings::getInstance();
 #ifdef SAVE_FILE_PATH
     if(exists(SAVE_FILE_PATH))
@@ -37,18 +33,8 @@ int main(int argc, char* argv[])
     qDebug() << "No settings file";
     return 0;
 #endif
-    instance.Print();
 
-    UIManager manager;
-
-    MeshScene *ms = new MeshScene();
-    MyItem *item = new MyItem();
-    ms->AddMesh(*(item->GetMesh()));
-
-    manager.GetWindow()->SetRenderOne(new CubeScene());
-    manager.GetWindow()->SetRenderTwo(ms);
-
-    manager.Show(); 
+    Application app2;
 
     return app.exec();
 }

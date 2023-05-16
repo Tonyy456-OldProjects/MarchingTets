@@ -1,17 +1,18 @@
-#include "MyItem.h"
+#include "MCGenerator.h"
 #include <iostream>
 #include <vtkMath.h>
-MyItem::MyItem()
+
+MCGenerator::MCGenerator()
 {
     mesh = new Mesh();
 }
 
-MyItem::~MyItem()
+MCGenerator::~MCGenerator()
 {
 
 }
 
-Mesh * MyItem::GetMesh()
+Mesh * MCGenerator::GetMesh()
 {
     int width = 100;
     int height = 100;

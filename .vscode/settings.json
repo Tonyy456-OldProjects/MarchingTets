@@ -85,5 +85,6 @@
         "stop_token": "cpp",
         "thread": "cpp",
         "cinttypes": "cpp"
-    }
+    },
+    "cmake.sourceDirectory": "/Users/ajdalesandro/Desktop/Research/MarchingTets/projects/5_marching_cubes"
 }

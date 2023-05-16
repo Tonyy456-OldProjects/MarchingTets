@@ -13,10 +13,8 @@ UIManager::UIManager() : ui(new Ui::TonyMainWindow)
 
     // set up button to have HWButton behavior
     //btn = new HWButton(ui->TonyHelloWorld, mainWindow);
-    ui->TonyLeftWindow->close();
     btn1 = new CloseScreenButton(ui->TonyLeftWindow, ui->CloseWindowOne, mainWindow);
     btn2 = new CloseScreenButton(ui->TonyRightWindow, ui->CloseWindowTwo, mainWindow);
-
 }
 
 MainQTWindow * UIManager::GetWindow() 
@@ -27,4 +25,14 @@ MainQTWindow * UIManager::GetWindow()
 void UIManager::Show()
 {
     mainWindow->show();
+}
+
+void UIManager::CloseLeftWindow()
+{
+    btn1->Close();
+}
+
+void UIManager::CloseRightWindow()
+{
+    btn2->Close();
 }

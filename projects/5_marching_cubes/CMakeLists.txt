@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.11)
  
 # ================= Set Project Name =======================
 if (NOT DEFINED PROJECT_NAME)
-    message(FATAL_ERROR "PPROJECT_NAME not set")
+  set(PROJECT_NAME "unnamed-project")
 endif()
 project(${PROJECT_NAME}) # sets PROJECT_NAME as well
 
@@ -109,3 +109,5 @@ if(DEFINED MT_BIN_DIR)
         RUNTIME DESTINATION ${MT_BIN_DIR}
     )
 endif()
+
+message(${CXX_FILES})
