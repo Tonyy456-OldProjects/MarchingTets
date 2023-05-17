@@ -14,6 +14,7 @@ class Mesh
         int AddCube(const int vs[4]);
         std::vector<double> GetVertices();
         std::vector<int> GetTriangles();
+        void Clean();
         void Print();
     private:
         std::vector<double> vertices;

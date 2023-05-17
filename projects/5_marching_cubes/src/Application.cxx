@@ -23,7 +23,7 @@ Application::Application()
         manager.CloseRightWindow();
 
     MeshScene *ms = new MeshScene();
-    MCGenerator *item = new MCGenerator(5,5,5,1.0);
+    MCGenerator *item = new MCGenerator(30,30,3,0.1);
     ms->AddMesh(*(item->GetMesh()));
     manager.GetWindow()->SetRenderOne(new CubeScene());
     manager.GetWindow()->SetRenderTwo(ms);

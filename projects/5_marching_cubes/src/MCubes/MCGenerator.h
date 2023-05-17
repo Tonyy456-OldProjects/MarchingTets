@@ -13,6 +13,7 @@ class MCGenerator
         int x_slices;
         int y_slices;
         int z_slices;
+        float isolevel;
         double seperation;
         Mesh *mesh;
 
