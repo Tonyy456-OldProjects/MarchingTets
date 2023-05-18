@@ -12,6 +12,10 @@ class MCGenerator
         void SetIsolevel(float value);
         Mesh * GetMesh();
     private:
+        int ind(int x, int y, int z)
+        {
+            return x + y * x_slices + z * (x_slices * y_slices); 
+        };
         int x_slices;
         int y_slices;
         int z_slices;

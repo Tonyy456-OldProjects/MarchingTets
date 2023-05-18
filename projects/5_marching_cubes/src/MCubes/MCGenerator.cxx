@@ -6,6 +6,9 @@
 #include "../Debug.h"
 #include "../Settings.h"
 #include <vector>
+#include <iostream>
+#include <iomanip>
+#include <thread>
 using namespace std;
 MCGenerator::MCGenerator(int xn, int yn, int zn, double seperation)
 {
@@ -21,19 +24,25 @@ MCGenerator::MCGenerator(int xn, int yn, int zn, double seperation)
 void MCGenerator::SetFrequency(float value) { frequency = value; }
 void MCGenerator::SetIsolevel(float value) { isolevel = value; }
 
-
 MCGenerator::~MCGenerator()
 {
 
 }
 
+void displayLoadingBar(int progress, int total, int barWidth = 50) {
+    //std::this_thread::sleep_for(std::chrono::milliseconds(50));
+    float fraction = static_cast<float>(progress) / total;
+    int filledWidth = static_cast<int>(fraction * barWidth);
+
+    std::cout << "\r[";
+    std::cout << std::setw(filledWidth) << std::setfill('=') << std::left << std::string(filledWidth, '=');
+    std::cout << std::setw(barWidth - filledWidth) << std::setfill(' ') << std::right << "]";
+    std::cout << " " << static_cast<int>(fraction * 100.0) << "%";
+    std::cout.flush();
+}
+
 Point VertexInterp(float isolevel, Point p1, Point p2, float v1, float v2)
 {
-    /*
-    float d = (isolevel - v1);
-    Point p = p1 + ((p2 - p1) * d) / (v2 - v1);
-    return p;
-    */
     Point p = (p1 + p2) / 2.0f;
     return p;
 }
@@ -44,10 +53,12 @@ Mesh * MCGenerator::GetMesh()
     noise.SetNoiseType(FastNoiseLite::NoiseType_Perlin);
     noise.SetFrequency(this->frequency);
 
-    //Point cvs[x_slices][y_slices][z_slices];
-    vector<vector<vector<Point>>> cvs(x_slices, vector<vector<Point> >(y_slices, vector<Point>(z_slices)));
-    //float val[x_slices][y_slices][z_slices];
-    vector<vector<vector<float>>> val(x_slices, vector<vector<float> >(y_slices, vector<float>(z_slices)));
+    int total = x_slices * y_slices * z_slices;
+    total += (x_slices - 1) * (y_slices - 1) * (z_slices - 1);
+    int it = 0;
+
+    Point *cvs = new Point[x_slices * y_slices * z_slices];
+    float *val = new float[x_slices * y_slices * z_slices];
     for(int x = 0; x < x_slices; x++)
     {
         for(int y = 0; y < y_slices; y++)
@@ -55,41 +66,44 @@ Mesh * MCGenerator::GetMesh()
             for(int z = 0; z < z_slices; z++)
             {
                 double xw = x, yw = y, zw = z;
-                cvs[x][y][z].x = xw; 
-                cvs[x][y][z].y = yw; 
-                cvs[x][y][z].z = zw; 
-                val[x][y][z] = noise.GetNoise(xw,yw,zw);
+                cvs[ind(x,y,z)].x = xw; 
+                cvs[ind(x,y,z)].y = yw; 
+                cvs[ind(x,y,z)].z = zw; 
+                val[ind(x,y,z)] = noise.GetNoise(xw,yw,zw);
+                it++;
             }
         }
+        displayLoadingBar(it, total);
     }
-
     for(int x = 0; x < x_slices - 1; x++)
     {
+        displayLoadingBar(it, total);
         for(int y = 0; y < y_slices - 1; y++)
         {
             for(int z = 0; z < z_slices - 1; z++)
             {
+                it++;
                 //get all points
                 Point p[8];
-                p[0] = cvs[x + 0][y + 0][z + 0];
-                p[1] = cvs[x + 1][y + 0][z + 0];
-                p[2] = cvs[x + 1][y + 0][z + 1];
-                p[3] = cvs[x + 0][y + 0][z + 1];
-                p[4] = cvs[x + 0][y + 1][z + 0];
-                p[5] = cvs[x + 1][y + 1][z + 0];
-                p[6] = cvs[x + 1][y + 1][z + 1];
-                p[7] = cvs[x + 0][y + 1][z + 1];
+                p[0] = cvs[ind(x + 0,y + 0,z + 0)];
+                p[1] = cvs[ind(x + 1,y + 0,z + 0)];
+                p[2] = cvs[ind(x + 1,y + 0,z + 1)];
+                p[3] = cvs[ind(x + 0,y + 0,z + 1)];
+                p[4] = cvs[ind(x + 0,y + 1,z + 0)];
+                p[5] = cvs[ind(x + 1,y + 1,z + 0)];
+                p[6] = cvs[ind(x + 1,y + 1,z + 1)];
+                p[7] = cvs[ind(x + 0,y + 1,z + 1)];
 
                 //get all surface values
                 float n[8];
-                n[0] = val[x + 0][y + 0][z + 0];
-                n[1] = val[x + 1][y + 0][z + 0];
-                n[2] = val[x + 1][y + 0][z + 1];
-                n[3] = val[x + 0][y + 0][z + 1];
-                n[4] = val[x + 0][y + 1][z + 0];
-                n[5] = val[x + 1][y + 1][z + 0];
-                n[6] = val[x + 1][y + 1][z + 1];
-                n[7] = val[x + 0][y + 1][z + 1];
+                n[0] = val[ind(x + 0,y + 0,z + 0)];
+                n[1] = val[ind(x + 1,y + 0,z + 0)];
+                n[2] = val[ind(x + 1,y + 0,z + 1)];
+                n[3] = val[ind(x + 0,y + 0,z + 1)];
+                n[4] = val[ind(x + 0,y + 1,z + 0)];
+                n[5] = val[ind(x + 1,y + 1,z + 0)];
+                n[6] = val[ind(x + 1,y + 1,z + 1)];
+                n[7] = val[ind(x + 0,y + 1,z + 1)];
 
                 int cubeindex = 0;
                 if(n[0] < isolevel) cubeindex |= 1;
@@ -156,7 +170,9 @@ Mesh * MCGenerator::GetMesh()
     bool cleanMesh = false;
     Settings &setting = Settings::getInstance();
     setting.TryGetSetting<bool>("CleanMesh", cleanMesh);
-    if(cleanMesh)
+    if(cleanMesh){
         mesh->Clean();
+        displayLoadingBar(100, 100);
+    }
     return mesh;
 }
