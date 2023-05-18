@@ -1,6 +1,7 @@
 # folders
 [Bb]uild/
 [Bb]in/
+[Bb]uild_[Oo]utput/
 
 # env file
 *.env
@@ -37,3 +38,4 @@
 *.exe
 *.out
 *.app
+libs/FastNoiseLite/

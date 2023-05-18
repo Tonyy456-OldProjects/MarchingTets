@@ -1,8 +1,8 @@
 #ifndef MESH_SCENE_H
 #define MESH_SCENE_H
 
-#include "UI/MTWindowScene.h"
-#include "data/Mesh.h"
+#include "../UI/MTWindowScene.h"
+#include "../Data/Mesh.h"
 
 class MeshScene : public MTWindowScene
 {

@@ -1,0 +1,7 @@
+
+HIGH need to change mesh to actually just vtk data structures
+HIGH need to speed up algorithm so mesh does not need cleaned at all
+
+MEDIUM need to add sliders such that I can auto reload.
+
+LOW parallelize algorithm if possible

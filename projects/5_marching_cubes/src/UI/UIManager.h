@@ -1,7 +1,8 @@
-
+#ifndef UI_MANAGER_H
+#define UI_MANAGER_H
 #include "ui_TonyDesign.h"
 #include "MainQTWindow.h"
-#include "Buttons/ButtonBehavior.h"
+#include "Buttons/CloseScreenButton.h"
 
 namespace Ui {
     class UIManager;
@@ -12,11 +13,17 @@ class UIManager
     public:
         UIManager();
         virtual ~UIManager() = default;
+
         void Show();
-        MainQTWindow *GetWindow();
+        void CloseLeftWindow();
+        void CloseRightWindow();
+
+        MainQTWindow* GetWindow();
     private:
-        ButtonBehavior *btn1;
-        ButtonBehavior *btn2;
+        CloseScreenButton *btn1;
+        CloseScreenButton *btn2;
         MainQTWindow *mainWindow;
         Ui::TonyMainWindow *ui;
 };
+
+#endif

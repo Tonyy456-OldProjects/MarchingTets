@@ -10,10 +10,12 @@ class CloseScreenButton : public ButtonBehavior
     public:
         CloseScreenButton(QWidget *window, QPushButton* button, QWidget* parent = nullptr);
         void onClick();
+        void Close();
+        void Open();
+        void Toggle();
     private:
         QWidget *window;
-        bool closed = false;
-
+        QWidget *parent;
 };
 
 #endif
