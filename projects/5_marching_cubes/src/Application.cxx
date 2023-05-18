@@ -23,7 +23,25 @@ Application::Application()
         manager.CloseRightWindow();
 
     MeshScene *ms = new MeshScene();
-    MCGenerator *item = new MCGenerator(30,30,3,0.1);
+
+    // ------- Make MCGenerator
+    int nx = 10;
+    int ny = 10;
+    int nz = 10;
+    double sep = 1.0;
+    float freq = 0.05f;
+    float iso = 0.0f;
+    setting.TryGetSetting<int>("nx", nx);
+    setting.TryGetSetting<int>("ny", ny);
+    setting.TryGetSetting<int>("nz", nz);
+    setting.TryGetSetting<double>("sep", sep);
+    setting.TryGetSetting<float>("freq", freq);
+    setting.TryGetSetting<float>("isolevel", iso);
+    MCGenerator *item = new MCGenerator(nx,ny,nz,sep);
+    item->SetFrequency(freq);
+    item->SetIsolevel(iso);
+
+
     ms->AddMesh(*(item->GetMesh()));
     manager.GetWindow()->SetRenderOne(new CubeScene());
     manager.GetWindow()->SetRenderTwo(ms);

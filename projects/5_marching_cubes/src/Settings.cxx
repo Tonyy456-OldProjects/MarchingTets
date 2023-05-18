@@ -16,16 +16,25 @@ void Settings::Print() const
             if (value.type() == typeid(int)) {
                 std::cout << "(int) ";
                 std::cout << boost::any_cast<int>(value);
+
             } else if (value.type() == typeid(double)) {
                 std::cout << "(double) ";
                 std::cout << boost::any_cast<double>(value);
+
             } else if (value.type() == typeid(std::string)) {
                 std::cout << "(string) ";
                 std::cout << boost::any_cast<std::string>(value);
+
             } else if (value.type() == typeid(bool)) {
                 std::cout << "(bool) ";
                 std::cout << boost::any_cast<bool>(value);
+
+            } else if (value.type() == typeid(float)) {
+                std::cout << "(float) ";
+                std::cout << boost::any_cast<float>(value);
+
             } else {
+
                 std::cout << "Unknown type";
             }
         } catch (const boost::bad_any_cast&) {
@@ -57,8 +66,20 @@ bool convertToBool(const std::string& str, bool& result)
     }
 }
 
+bool convertToFloat(const std::string& str, float& result)
+{
+    try {
+        result = std::stof(str);
+        return true;
+    } catch (const std::invalid_argument& e) {
+        return false;
+    }
+}
+
 bool convertToDouble(const std::string& str, double& result)
 {
+    if (str.find('f') != std::string::npos)
+        return false;
     try {
         result = std::stod(str);
         return true;
@@ -69,6 +90,8 @@ bool convertToDouble(const std::string& str, double& result)
 
 bool convertToInt(const std::string& str, int& result)
 {
+    if (str.find('.') != std::string::npos || str.find('f') != std::string::npos)
+        return false;
     try {
         result = std::stoi(str);
         return true;
@@ -122,6 +145,13 @@ void Settings::Initialize(const std::string& filename)
         if(convertToDouble(value, doubleVal))
         {
             savedSettings[key] = doubleVal;
+            continue;
+        }
+
+        float floatVal;
+        if(convertToFloat(value, floatVal))
+        {
+            savedSettings[key] = floatVal;
             continue;
         }
 

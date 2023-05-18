@@ -8,12 +8,15 @@ class MCGenerator
     public:
         MCGenerator(int xn, int yn, int zn, double seperation);
         ~MCGenerator();
+        void SetFrequency(float value);
+        void SetIsolevel(float value);
         Mesh * GetMesh();
     private:
         int x_slices;
         int y_slices;
         int z_slices;
         float isolevel;
+        float frequency;
         double seperation;
         Mesh *mesh;
 

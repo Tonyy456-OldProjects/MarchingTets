@@ -36,6 +36,7 @@ int main(int argc, char* argv[])
     qDebug() << "No settings file";
     return 0;
 #endif
+    instance.Print();
 
     Application app2;
 
