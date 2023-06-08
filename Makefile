@@ -1,6 +1,6 @@
 
 all:
-	./compile 5
+	./compile 6
 
 run:
-	./bin/marching_cubes
+	./bin/reload_capabilities

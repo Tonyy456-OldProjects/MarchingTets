@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TonyMainWindow</class>
+ <widget class="QMainWindow" name="TonyMainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>836</width>
+    <height>737</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Marching Tetrahedrons</string>
+  </property>
+  <widget class="QWidget" name="CenterWidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="1" column="0">
+     <widget class="QWidget" name="widget" native="true">
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QOpenGLWidget" name="TonyLeftWindow"/>
+       </item>
+       <item>
+        <widget class="QOpenGLWidget" name="TonyRightWindow"/>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QPushButton" name="TonyHelloWorld">
+      <property name="text">
+       <string>&quot;Hello World&quot;</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>836</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="TonyMenuButton1">
+    <property name="title">
+     <string>DoThing1</string>
+    </property>
+   </widget>
+   <addaction name="TonyMenuButton1"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

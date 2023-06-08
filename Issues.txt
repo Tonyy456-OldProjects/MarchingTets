@@ -1,7 +1,45 @@
+TODO
+- [ ] make mesh use vtk data structures and build it as well
+- [ ] parallelize code
+- [ ] add sliders without reload file
+- [ ] (parallelize code?) Update Mesh in real time. try and translate and then regenerate it.
+- [ ] generate the look up table myself.
 
-HIGH need to change mesh to actually just vtk data structures
-HIGH need to speed up algorithm so mesh does not need cleaned at all
 
-MEDIUM need to add sliders such that I can auto reload.
+#=============== NESTED FUNCTION ================
+#include <iostream>
+void outerFunction()
+{
+    int array[5] = {1, 2, 3, 4, 5};
+    auto helperFunction = [&array](int index) {
+        return array[index];
+    };
+    int result = helperFunction(2);
+    std::cout << "Result: " << result << std::endl;
+}
+int main()
+{
+    outerFunction();
+    return 0;
+}
 
-LOW parallelize algorithm if possible
+#=============== CLOCK CODE ================
+#include <iostream>
+#include <chrono>
+void someFunction()
+{
+    for (int i = 0; i < 1000000; ++i){}
+}
+
+int main()
+{
+    auto startTime = std::chrono::high_resolution_clock::now();
+    someFunction();
+    auto endTime = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();
+    std::cout << "Elapsed time: " << duration << " milliseconds" << std::endl;
+    return 0;
+}
+
+
+
