@@ -2,7 +2,7 @@
 #define MY_DEBUG_H
 
 #include <iostream>
-#include "./Data/Point.h"
+#include "./Point.h"
 #include <array> 
 #include <vector>
 #include <cstdio>
@@ -103,6 +103,7 @@ private:
     }
     
 };
+
 // Declare the global debug object
 extern Debug debug;
 

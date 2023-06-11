@@ -1,6 +1,6 @@
 
 all:
-	./compile 6
+	./compile 3
 
 run:
-	./bin/reload_capabilities
+	./bin/*
