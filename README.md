@@ -13,6 +13,7 @@ Marching Tetrahedrons is a technique used in computer graphics to render 3D mode
 * [Marching Tets Wikipedia](https://en.wikipedia.org/wiki/Marching_tetrahedra)
 * [Marching Tets Research Paper](https://arxiv.org/abs/2011.08697),    [pdf](https://arxiv.org/pdf/2011.08697.pdf)
 * Marching Cubes Research Paper, [pdf](https://www.cs.toronto.edu/~jacobson/seminar/lorenson-and-cline-1987.pdf)
+* [Fiber Surfacing Paper](https://julien-tierny.github.io/stuff/papers/carr_eurovis15.pdf)
 
 ## Preview
 [insert screenshots of project]
